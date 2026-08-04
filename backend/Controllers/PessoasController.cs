@@ -12,6 +12,14 @@ namespace projetinho.Controllers
     {
         private readonly AppDbContext _appDbContext = appDbContext;
 
+        /// <summary>
+        /// Adiciona uma nova pessoa ao banco de dados.
+        /// </summary>
+        /// <remarks>
+        /// teste
+        /// </remarks>
+        /// <response code="201">Pessoa adicionada com sucesso</response>
+        /// <param name="pessoaDTO">dados da pessoa: nome e idade</param>
         [HttpPost]
         public async Task<IActionResult> AdicionarPessoa([FromBody] PessoaDTO pessoaDTO)
         {
@@ -45,6 +53,13 @@ namespace projetinho.Controllers
             }
             return Ok(pessoas);
         }
+        /// <summary>
+        /// Consultar total de receitas, despesas e saldo líquido individual de cada pessoa e o geral.
+        /// </summary>
+        /// <returns>
+        /// total de receitas, despesas e saldo líquido para cada pessoa cadastrada, e um total geral desses valores.
+        /// </returns>
+        /// <response code="200"> totais retornados com sucesso</response>
         [HttpGet("pessoas/totais")]
         public async Task<IActionResult> ConsultarTotalPorPessoa()
         {
