@@ -19,7 +19,7 @@ namespace projetinho.Controllers
         /// teste
         /// </remarks>
         /// <response code="201">Pessoa adicionada com sucesso</response>
-        /// <param name="pessoaDTO">dados da pessoa: nome e idade</param>
+        /// <param name="pessoaDTO">dados da pessoa: nome e idade, o id é GUID e gerado automaticamente</param>
         [HttpPost]
         public async Task<IActionResult> AdicionarPessoa([FromBody] PessoaDTO pessoaDTO)
         {
@@ -31,7 +31,7 @@ namespace projetinho.Controllers
             _appDbContext.Pessoas.Add(pessoa);
             await _appDbContext.SaveChangesAsync();
 
-            return Created("Pessoa adicionada: ",pessoa);
+            return CreatedAtAction(nameof(BuscarPessoaId), new { id = pessoa.Id }, pessoa);
         }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Pessoa>>> ListarPessoas()
@@ -138,7 +138,7 @@ namespace projetinho.Controllers
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> DeletarPessoa([FromRoute]Guid id)
-        {
+        {   
             var pessoa = await _appDbContext.Pessoas.FindAsync(id);
             if (pessoa == null)
             {
@@ -146,7 +146,7 @@ namespace projetinho.Controllers
             }
             _appDbContext.Pessoas.Remove(pessoa);
             await _appDbContext.SaveChangesAsync();
-            return Ok(pessoa + "\n DELETADO.");
+            return NoContent();
         }
     }
 }

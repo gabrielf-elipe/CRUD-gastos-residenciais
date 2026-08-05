@@ -38,7 +38,8 @@ API RESTful simples desenvolvida em .NET para controle de gastos residenciais, c
    ```
    dotnet run
    ```
-5. A API provavelmente estará disponível em `http://localhost:5237` (ou em outra porta exibida no terminal). A documentação interativa dos endpoints pode ser acessada via Swagger.
+5. A API provavelmente estará disponível em `http://localhost:5237` (ou em outra porta exibida no terminal). A documentação interativa dos endpoints pode ser acessada via Scalar.
+P.S: Durante umas semanas eu estava utilizando o Swagger, mas descobri que ele já é considerado ""datado"", então migrei pro Scalar, mas utilizando uma interface parecida, pois me acostumei com a do Swagger.
 
 
 ## Funcionalidades
@@ -75,6 +76,6 @@ API RESTful simples desenvolvida em .NET para controle de gastos residenciais, c
 
 ## ☀️ Possíveis futuros
 Desejo tornar esse projeto algo mais próximo de um sistema real, portanto trabalharei em:
-- frontend responsivo (já em desenvolvimento)
+- frontend responsivo 
 - Migrar do SQLite para bancos como PostgreSQL, SQL Server...
 - Autenticação e autorização
