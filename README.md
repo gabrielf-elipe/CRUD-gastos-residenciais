@@ -39,6 +39,7 @@ API RESTful simples desenvolvida em .NET para controle de gastos residenciais, c
    dotnet run
    ```
 5. A API provavelmente estará disponível em `http://localhost:5237` (ou em outra porta exibida no terminal). A documentação interativa dos endpoints pode ser acessada via Scalar.
+
 P.S: Durante umas semanas eu estava utilizando o Swagger, mas descobri que ele já é considerado ""datado"", então migrei pro Scalar, mas utilizando uma interface parecida, pois me acostumei com a do Swagger.
 
 

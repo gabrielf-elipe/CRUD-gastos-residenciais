@@ -15,11 +15,8 @@ namespace projetinho.Controllers
         /// <summary>
         /// Adiciona uma nova pessoa ao banco de dados.
         /// </summary>
-        /// <remarks>
-        /// teste
-        /// </remarks>
         /// <response code="201">Pessoa adicionada com sucesso</response>
-        /// <param name="pessoaDTO">dados da pessoa: nome e idade, o id é GUID e gerado automaticamente</param>
+        /// <param name="pessoaDTO">dados da pessoa: nome e idade, o id GUID é gerado automaticamente</param>
         [HttpPost]
         public async Task<IActionResult> AdicionarPessoa([FromBody] PessoaDTO pessoaDTO)
         {
@@ -33,6 +30,13 @@ namespace projetinho.Controllers
 
             return CreatedAtAction(nameof(BuscarPessoaId), new { id = pessoa.Id }, pessoa);
         }
+        /// <summary>
+        /// Retorna uma lista das pessoas no banco de dados.
+        /// </summary>
+        /// <remarks>
+        /// Lista todas as pessoas presentes no banco de dados
+        /// </remarks>
+        /// <response code="200">Listagem retornada com sucesso</response>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Pessoa>>> ListarPessoas()
         {
@@ -41,6 +45,9 @@ namespace projetinho.Controllers
 
             return Ok(pessoas);
         }
+        /// <summary>
+        /// Retorna pessoas com o nome especificado (é case sensitive). 
+        /// </summary>
         [HttpGet("buscar-por-nome")]
         public async Task<ActionResult<IEnumerable<Pessoa>>> BuscaPessoaNome([FromQuery] string nome)
         {
@@ -59,7 +66,7 @@ namespace projetinho.Controllers
         /// <returns>
         /// total de receitas, despesas e saldo líquido para cada pessoa cadastrada, e um total geral desses valores.
         /// </returns>
-        /// <response code="200"> totais retornados com sucesso</response>
+        /// <response code="200"> totais retornados com sucesso</response>  
         [HttpGet("pessoas/totais")]
         public async Task<IActionResult> ConsultarTotalPorPessoa()
         {
@@ -107,6 +114,17 @@ namespace projetinho.Controllers
         }
     });
         }
+        /// <summary>
+        /// Buscar a pessoa que tem o id especificado.
+        /// </summary>
+        /// <returns>
+        /// Pessoa específica com esse id.
+        /// </returns>
+        /// <response code="200"> Pessoa encontrada e retornada com sucesso.</response>
+        /// <response code="400"> Id em formato inválido, deve ser GUID.</response>
+        /// <response code="404"> Id inválido, não foi encontrado nenhuma pessoa.</response>
+        /// <param name="id">id GUID da pessoa.</param>  
+        // a partir daqui não vou mais documentar completão pq nesse contexto de projeto de estudos, é meio redundante e acho que já deu pra ver que entendi como funciona
         [HttpGet("{id}")]
         public async Task<ActionResult<Pessoa>> BuscarPessoaId([FromRoute] Guid id)
         {
@@ -119,7 +137,9 @@ namespace projetinho.Controllers
             }
             return Ok(pessoa);
         }
-
+        /// <summary>
+        /// Atualiza informações de uma pessoa com o id especificado.
+        /// </summary>
         [HttpPut("{id}")]
         public async Task<IActionResult> AtualizarPessoa(Guid id, [FromBody] PessoaDTO pessoaAtualizado)
         {
@@ -135,6 +155,9 @@ namespace projetinho.Controllers
             return Ok(pessoa);
 
         }
+        /// <summary>
+        /// Deleta uma pessoa com o id especificado
+        /// </summary>
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> DeletarPessoa([FromRoute]Guid id)

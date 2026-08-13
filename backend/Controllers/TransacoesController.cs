@@ -13,6 +13,9 @@ namespace projetinho.Controllers
     {
         private readonly AppDbContext _appDbContext = appDbContext;
 
+        /// <summary>
+        /// Adiciona uma transação.
+        /// </summary>
         [HttpPost]
 
         public async Task<IActionResult> AdicionarTransacao([FromBody] TransacaoDTO transacaoDTO)
@@ -45,13 +48,18 @@ namespace projetinho.Controllers
             await _appDbContext.SaveChangesAsync();
             return Ok(transacao);
         }
-
+        /// <summary>
+        /// Retorna a lista de transações.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Transacao>>> ListarTransacoes()
         {
             var transacoes = await _appDbContext.Transacoes.ToListAsync();
             return Ok(transacoes);
         }
+        /// <summary>
+        /// Retorna uma transação com o id GUID especificado.
+        /// </summary>
         [HttpGet("{id}")]
         public async Task<IActionResult> BuscarTransacaoId(Guid id)
         {
